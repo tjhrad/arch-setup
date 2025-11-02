@@ -1,0 +1,103 @@
+require("config")
+
+-- nvim config
+
+-- Set leader key to SPACE
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+local o = vim.o
+local keymap = vim.keymap.set
+
+-- UI
+o.number = true
+-- o.relativenumber = true
+o.cursorline = true
+o.signcolumn = 'yes'
+o.termguicolors = true
+o.wrap = false
+
+-- Indentation
+o.expandtab = true
+o.shiftwidth = 4
+o.tabstop = 4
+o.smartindent = true
+
+-- Search
+o.ignorecase = true        -- Ignore case when searching...
+o.smartcase = true         -- ...unless uppercase present
+o.incsearch = true         -- Show matches as you type
+o.hlsearch = true          -- Highlight all matches
+
+-- Enable mouse mode
+o.mouse = 'a'
+
+-- Files
+o.undofile = true
+
+-- Behavior
+o.scrolloff = 20            -- Keep lines visible when scrolling
+o.splitright = true        -- Vertical splits open to the right
+o.splitbelow = true        -- Horizontal splits open below
+-- o.clipboard = 'unnamedplus' -- Use system clipboard
+
+-- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+vim.schedule(function()
+    o.clipboard = 'unnamedplus'
+end)
+
+-- Performance
+o.updatetime = 250         -- Faster completion & diagnostics
+o.timeoutlen = 400         -- Shorter timeout for mapped sequences
+
+-- Turn on confirmation dialog box that will ask if you wish to save if 
+-- performing an operation would fail due to unsaved changes in the buffer (like ':q')
+-- See ':help 'confirm''
+o.confirm = true
+
+-- TIP: Disable arrow keys in normal mode
+keymap('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+keymap('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+keymap('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+keymap('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
+-- Faster mode switching
+keymap('i', 'jk', '<Esc>', { desc = 'Exit insert mode' })
+
+-- File operations
+keymap('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
+keymap('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
+
+-- Clear search highlight
+keymap('n', '<leader>h', ':nohlsearch<CR>', { desc = 'Clear highlight' })
+
+-- Keybinds to make split navigation easier.
+--  Use CTRL+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+keymap('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+keymap('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+keymap('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+keymap('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.hl.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
