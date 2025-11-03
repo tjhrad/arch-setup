@@ -7,6 +7,8 @@ firefox
 jellyfin-media-player
 lazygit
 libreoffice
+lutris
+makemkv
 mpv
 obsidian
 okular
@@ -16,3 +18,5 @@ proton-pass
 proton-vpn-gtk-app
 signal-desktop
 steam
+vlc
+vlc-plugin-ffmpeg

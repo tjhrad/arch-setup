@@ -9,8 +9,11 @@ docker
 docker-buildx
 docker-compose
 fastfetch
+ffmpeg
 flatpak
 fzf
+gstreamer
+gst-plugins-ugly
 htop
 intel-ucode
 lib32-freetype
@@ -24,6 +27,7 @@ network-manager-applet
 ntfs-3g
 nvidia
 nvidia-utils
+rclone
 rsync
 starship
 tar
