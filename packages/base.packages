@@ -14,7 +14,7 @@ flatpak
 fzf
 gstreamer
 gst-plugins-ugly
-htop
+btop
 intel-ucode
 lib32-freetype
 lib32-glibc

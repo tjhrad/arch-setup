@@ -24,28 +24,7 @@ else
     echo "yay is already installed."
 fi
 
-# # ---- 3. Install packages ----
-# while read -r pkg; do
-#     # Skip empty lines and comments
-#     [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue
-#
-#     echo "Installing $pkg..."
-#
-#     # Try pacman first
-#     if pacman -Qi "$pkg" &>/dev/null; then
-#         echo "$pkg is already installed via pacman."
-#     else
-#         if pacman -Ss "^$pkg$" &>/dev/null; then
-#             sudo pacman -S --needed --noconfirm "$pkg"
-#         else
-#             yay -S --needed --noconfirm "$pkg"
-#         fi
-#     fi
-# done < "$PKG_FILE"
-#
-# echo "All base packages installed successfully!"
-
-
+# ---- 3. Install packages ----
 echo "Installing base packages from base.packages..."
 if [[ -f "$PKG_FILE" ]]; then
     yay -S --needed --noconfirm - < "$PKG_FILE"
