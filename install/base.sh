@@ -31,7 +31,7 @@ while read -r pkg; do
     
     echo "Installing $pkg..."
     
-    Try pacman first
+    # Try pacman first
     if pacman -Qi "$pkg" &>/dev/null; then
         echo "$pkg is already installed via pacman."
     else
