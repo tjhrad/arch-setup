@@ -1,11 +1,11 @@
-echo "Updating system and installing essential build tools..."
-sudo pacman -Syu --needed --noconfirm
-sudo pacman -S --needed --noconfirm base-devel git
-
 echo "Backing up current pacman.conf and replacing with custom config..."
 sudo mv /etc/pacman.conf /etc/pacman.conf.bak
 sudo cp -f "$INSTALL_PATH/default/pacman/pacman.conf" /etc/pacman.conf
 sudo pacman -Syy
+
+echo "Updating system and installing essential build tools..."
+sudo pacman -Syu --needed --noconfirm
+sudo pacman -S --needed --noconfirm base-devel git
 
 echo "Updating mirror list..."
 sudo pacman -S --needed --noconfirm reflector
