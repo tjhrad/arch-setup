@@ -3,7 +3,7 @@ sudo pacman -Syu --needed --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git
 
 echo "Backing up current pacman.conf and replacing with custom config..."
-sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+sudo mv /etc/pacman.conf /etc/pacman.conf.bak
 sudo cp -f "$INSTALL_PATH/default/pacman/pacman.conf" /etc/pacman.conf
 sudo pacman -Syy
 
