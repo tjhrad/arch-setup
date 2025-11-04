@@ -1,6 +1,7 @@
 alacritty
-brave
+ark
 btop
+brave-bin
 discord
 filebot
 firefox
@@ -16,7 +17,11 @@ opera
 proton-mail
 proton-pass
 proton-vpn-gtk-app
+qbittorrent
 signal-desktop
 steam
+thunderbird
+tor
 vlc
 vlc-plugin-ffmpeg
+qualculate-gtk

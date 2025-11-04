@@ -21,6 +21,7 @@ lib32-glibc
 lib32-vulkan-nvidia
 libva-vdpau-driver
 man
+nano
 neovim
 networkmanager
 network-manager-applet

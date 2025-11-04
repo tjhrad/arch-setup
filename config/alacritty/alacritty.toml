@@ -7,31 +7,24 @@ TERM = "xterm-256color"
 size = 11.0
 
 [font.normal]
-family = "FiraCode Nerd Font Mono"
+family = "FiraCode Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "FiraCode Nerd Font Mono"
+family = "FiraCode Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "FiraCode Nerd Font Mono"
+family = "FiraCode Nerd Font"
 style = "Retina"
 
 [font.bold_italic]
-family = "FiraCode Nerd Font Mono"
+family = "FiraCode Nerd Font"
 style = "SemiBold"
 
-
-# Window tweaks to make it pop
 [window]
 dynamic_title = true
 opacity = 0.95
 
-# [window.padding]
-# x = 10
-# y = 6
-
-# Scrollback for better visibility
 [scrolling]
 history = 10000

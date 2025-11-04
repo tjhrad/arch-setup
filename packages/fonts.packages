@@ -1,5 +1,12 @@
 noto-fonts
+noto-fonts-emoji
+noto-fonts-c
+noto-fonts-extra
 ttf-dejavu
-ttf-fira-code
+ttf-liberation
+ttf-roboto
+ttf-opensans
+ttf-hack-nerd
+ttf-firacode-nerd
 ttf-font-awesome
 ttf-jetbrains-mono-nerd
