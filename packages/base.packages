@@ -1,3 +1,5 @@
+avahi
+btop
 clang
 cmake
 cups
@@ -12,13 +14,16 @@ fastfetch
 ffmpeg
 flatpak
 fzf
-gstreamer
+gst-plugins-bad
+gst-plugins-good
+gst-plugins-libav
 gst-plugins-ugly
-btop
+gstreamer
 intel-ucode
 lib32-freetype
 lib32-glibc
 lib32-vulkan-nvidia
+libfdk-aac
 libva-vdpau-driver
 man
 nano
