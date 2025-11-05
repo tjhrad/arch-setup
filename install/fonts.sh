@@ -19,6 +19,6 @@ else
     exit 1
 fi
 
-sudo fc-cace -fv
+sudo fc-cache -fv
 
 echo "All fonts installed successfully!"
