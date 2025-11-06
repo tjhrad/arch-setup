@@ -1,0 +1,16 @@
+Brave
+calibre
+Discord
+Jellyfin Media Player
+Flatseal
+MakeMKV
+Opera
+YACReader
+Yubico Authenticator
+FreeTube
+Obsidian
+FileBot
+GNU Image Manipulation Program
+Boxes
+Akregator
+Balena Etcher
