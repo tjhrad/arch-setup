@@ -1,0 +1,86 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# ---------- Config ----------
+fzf_args=(
+  --multi
+  --preview-window 'down:65%:wrap'
+  --preview-label-pos 'bottom'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:cyan,marker:cyan'
+)
+
+# Helper for safe confirmation
+confirm_action() {
+    read -rp "$1 (y/N): " reply
+    [[ "$reply" =~ ^[Yy]$ ]]
+}
+
+# Helper to run updatedb safely in background
+update_locate_db() {
+    if command -v updatedb >/dev/null 2>&1; then
+        echo "Updating locate database in background..."
+        sudo updatedb &
+    fi
+}
+
+# ---------- Main Menu ----------
+echo "Select an action:"
+select action in "Install Repo Packages" "Install AUR Packages" "Remove Packages" "Exit"; do
+    case $REPLY in
+        1)
+            # Install Repo Packages
+            pkg_names=$(pacman -Slq | fzf \
+                --preview 'pacman -Sii {1}' \
+                --preview-label='Package Info' \
+                "${fzf_args[@]}")
+            if [[ -n "$pkg_names" ]] && confirm_action "Install selected repo packages?"; then
+                echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -S
+                update_locate_db
+                show-done
+            fi
+            break
+            ;;
+        2)
+            # Install AUR Packages
+            pkg_names=$(yay -Slqa | fzf \
+                --preview 'yay -Siia {1}' \
+                --preview-label='Package Info / AUR' \
+                --bind 'alt-b:change-preview:yay -Gpa {1} | tail -n +5' \
+                --bind 'alt-B:change-preview:yay -Siia {1}' \
+                "${fzf_args[@]}")
+            if [[ -n "$pkg_names" ]] && confirm_action "Install selected AUR packages?"; then
+                echo "$pkg_names" | tr '\n' ' ' | xargs yay -S
+                update_locate_db
+                show-done
+            fi
+            break
+            ;;
+        3)
+            # Remove Packages (repo + AUR)
+            pkg_names=$(yay -Qqe | fzf \
+                --preview 'yay -Qi {1}' \
+                --preview-label='Package Info' \
+                "${fzf_args[@]}")
+            if [[ -n "$pkg_names" ]] && confirm_action "Remove selected packages and dependencies?"; then
+                echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -Rns
+                # Clean cache automatically
+                yay -Sc --noconfirm &
+                update_locate_db
+                show-done
+            fi
+            break
+            ;;
+        4)
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            echo "Invalid selection."
+            ;;
+    esac
+done
+

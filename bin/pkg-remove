@@ -1,0 +1,34 @@
+#!/bin/bash
+
+fzf_args=(
+  --multi
+  --preview 'yay -Qi {1}'
+  --preview-label='alt-p: toggle description, alt-j/k: scroll, tab: multi-select'
+  --preview-label-pos='bottom'
+  --preview-window 'down:65%:wrap'
+  --bind 'alt-p:toggle-preview'
+  --bind 'alt-d:preview-half-page-down,alt-u:preview-half-page-up'
+  --bind 'alt-k:preview-up,alt-j:preview-down'
+  --color 'pointer:red,marker:red'
+)
+
+#pkg_names=$(yay -Qqe | fzf "${fzf_args[@]}")
+# TODO: Test to see if the below command works. Otherwise, revert to above.
+pkg_names=$(yay -Qe | awk '{print $1}' | fzf "${fzf_args[@]}")
+
+if [[ -n "$pkg_names" ]]; then
+  # Convert newline-separated selections to space-separated for yay
+  echo "Package to remove:"
+  echo "$pkg_names"
+  echo
+
+  read -rp "Proceed with removal? (y/N): " confirm
+  if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    echo "$pkg_names" | tr '\n' ' ' | xargs sudo pacman -Rns
+    # Clean AUR build cache
+    yay -Sc --noconfirm
+    show-done
+  else
+    echo "Aborted."
+  fi
+fi
