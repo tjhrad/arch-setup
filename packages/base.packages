@@ -19,6 +19,7 @@ gst-plugins-good
 gst-plugins-libav
 gst-plugins-ugly
 gstreamer
+gum
 intel-ucode
 lib32-freetype
 lib32-glibc
